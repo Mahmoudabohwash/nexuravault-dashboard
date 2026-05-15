@@ -113,7 +113,7 @@ export const pages = {
         className: "car-card",
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
-        image: "BMW/BMW8.jpg",
+        image: "BMW8.jpg",
         description: "Unleash the wild side of driving."
     },
   
@@ -123,7 +123,7 @@ export const pages = {
         className: "car-card",
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
-        image: "BMW/BMW9.jpg",
+        image: "BMW9.jpg",
         description: "Unleash the wild side of driving."
     },
   
