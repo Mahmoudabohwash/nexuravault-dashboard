@@ -1,0 +1,329 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    height: 100vh;
+    overflow: hidden;
+    background-color: #f5f5f5;
+}
+
+#main-container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+/* الهيدر فوق */
+#header {
+    width: 100%;
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: yellow;
+    color: black;
+    flex-shrink: 0;
+}
+
+/* البودي اللي شايل السايدبار والكونتنت */
+#body-wrappr {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    height: calc(100vh - 60px);
+    min-height: 0;
+}
+
+/* السايدبار الشمال */
+#sidbar {
+    width: 250px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* التعديل هنا: يخلي الأزرار تبدأ من فوق وتحت بعض علطول */
+    gap: 15px; /* التعديل هنا: أنت اللي بتحدد الفراغ بين كل زرار وزرار بالظبط */
+    flex-shrink: 0;
+    background-color: black;
+    color: yellow;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+/* منطقة الكونتنت اللي بيترسم فيها */
+#content-area {
+    width: 100%;
+    padding: 24px 24px 60px 24px;
+    flex-grow: 1;
+    overflow-y: auto;
+    background-color: #111827;
+}
+
+.h1-style {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.img-style {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid #ffffff50;
+    object-fit: cover;
+}
+
+.action-btn {
+    background-color: rgba(255, 217, 0, 0.773);
+    margin: 8px 0;
+    padding: 12px 16px;
+    border-radius: 8px;
+    width: 100%;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    border: none;
+    color: rgb(0, 0, 0);
+    text-align: center;
+    font-size: 15px;
+}
+
+.action-btn:hover {
+    background-color: #000000;
+    transform: translateX(-15px);
+    border-right: 4px solid yellow;
+    color: yellow;
+}
+
+/* هيدر الصفحة */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: yellow;
+    margin-bottom: 30px;
+    border-bottom: 2px solid yellow;
+    padding-bottom: 10px;
+}
+
+.page-header h1 {
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.page-header p {
+    font-size: 15px;
+    color: yellow;
+}
+
+/* كرتونة الاحصائيات */
+.stats-wrapper {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+/* كارت الاحصائيات */
+.stat-card {
+    background-color: gold;
+    color: black;
+    padding: 24px;
+    border-radius: 16px;
+    width: 250px;
+    min-height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: 0.2s;
+}
+
+.stat-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.stat-card h3 {
+    font-size: 15px;
+    font-weight: 400;
+    margin: 0;
+}
+
+.stat-card p {
+    font-size: 36px;
+    font-weight: 700;
+    margin: 0;
+    color: black;
+}
+
+/* كرتونة المنتجات */
+.cards-wrapper {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    width: 100%;
+}
+
+/* كارت المنتج */
+.car-card {
+    background: #1f2937;
+    padding: 166px;
+    padding: 16px;
+    border-radius: 12px;
+    color: yellow;
+    transition: 0.2s;
+}
+
+.car-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.car-card-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.car-card h3 {
+    font-size: 18px;
+    margin-bottom: 4px;
+}
+
+.car-card p {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.btn {
+    background-color: rgb(9, 1, 17);
+    color: yellow;
+    width: 50px;
+    height: 20px;
+    gap: 8px;
+    border-radius: 5px;
+}
+
+.UPGAPP {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 209px;
+    height: 400px;
+    border-radius: 10px;
+    background-color: rgba(255, 255, 0, 0.619);
+}
+
+.order-table-class {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    text-align: center;
+    gap: 10px;
+    background-color: #00000096;
+    color: rgba(255, 255, 0, 0.827);
+    border-collapse: collapse;
+}
+
+.tr-style {
+    border-top: 3px solid #ffffff;
+    border-bottom: 3px solid #ffffff;
+}
+
+.chart-Wrapper {
+    margin-top: 50px;
+    width: 100%;
+    height: 400px;
+    border-radius: 8px;
+}
+
+/*ريسبونسف*/
+
+@media (max-width: 992px) {
+    /* شاشات التابلت والشاشات المتوسطة: كروت العربيات تقلب حتتين بدل تلاتة */
+    .cards-wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        overflow-y: auto; /* نسمح بالاسكرول الكلي للموقع على الشاشات الصغيرة */
+    }
+
+    #body-wrappr {
+        flex-direction: column; /* نقلب السايدبار والكونتنت فوق بعض */
+        height: auto;
+        overflow: visible;
+    }
+
+    /* السايدبار يتحول لشريط علوي نايم مرن */
+    #sidbar {
+        width: 100%;
+        max-height: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 10px;
+        padding: 15px;
+        justify-content: center;
+        overflow-y: visible;
+    }
+
+    .action-btn {
+        width: auto; /* الأزرار تاخد مقاس الكلمة بس جنب بعضها */
+        margin: 0;
+        padding: 8px 16px;
+    }
+    
+    .action-btn:hover {
+        transform: none; /* نلغي حركة الـ Translate على الموبايل عشان متبوظش التصميم */
+        border-right: none;
+        border-bottom: 3px solid yellow;
+    }
+
+    #content-area {
+        padding: 15px 15px 30px 15px;
+        overflow-y: visible;
+    }
+
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    /* كروت الإحصائيات تفرد بكامل العرض وتترص تحت بعض بشياكة */
+    .stat-card {
+        width: 100%;
+    }
+
+    /* كروت المنتجات تقلب كارت واحد في السطر عشان تبان واضحة */
+    .cards-wrapper {
+        grid-template-columns: 1fr;
+    }
+
+    /* الجدول نخليه يقبل الاسكرول الجانبي عشان الشاشة متضربش بالعرض */
+    .order-table-class {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    .chart-Wrapper {
+        height: 300px; /* نصغر حجم التشارت شوية على الفون */
+        margin-top: 30px;
+    }
+}
