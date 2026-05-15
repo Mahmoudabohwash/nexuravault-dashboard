@@ -44,7 +44,7 @@ export const pages = {
   title: "BMW M5 - Black Hawk",
   className: "car-card",  
   price: "150,000 USD",
-  image: "BMW/BMW.jpg", // المسار لصورتك اللي في الصورة
+  image: "BMW.jpg", // المسار لصورتك اللي في الصورة
   description: "The definition of luxury and performance."
  },
     {
@@ -53,7 +53,7 @@ export const pages = {
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
         className: "car-card",
-        image: "BMW/BMW2.jpg",
+        image: "BMW2.jpg",
         description: "Unleash the wild side of driving."
     },
   
@@ -63,7 +63,7 @@ export const pages = {
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
         className: "car-card",
-        image: "BMW/BMW3.jpg",
+        image: "BMW3.jpg",
         description: "Unleash the wild side of driving."
     },
   
@@ -73,7 +73,7 @@ export const pages = {
         className: "car-card",
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
-        image: "BMW/BMW4.jpg",
+        image: "BMW4.jpg",
         description: "Unleash the wild side of driving."
     },
   
@@ -83,7 +83,7 @@ export const pages = {
         className: "car-card",
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
-        image: "BMW/BMW5.jpg",
+        image: "BMW5.jpg",
         description: "Unleash the wild side of driving."
     },
   
@@ -93,7 +93,7 @@ export const pages = {
         className: "car-card",
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
-        image: "BMW/BMW6.jpg",
+        image: "BMW6.jpg",
         description: "Unleash the wild side of driving."
     },
   
@@ -103,7 +103,7 @@ export const pages = {
         className: "car-card",
         title: "BMW M3 - Tiger Edition",
         price: "135,000 USD",
-        image: "BMW/BMW7.jpg",
+        image: "BMW7.jpg",
         description: "Unleash the wild side of driving."
     },
   
