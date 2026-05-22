@@ -1,7 +1,7 @@
 export const headerdata = [
   { tag: "div", className: "div-style", text: "wallet 5000 USD" },
   { tag: "h1", className: "h1-style", text: "NexuraVault " },
-  { tag: "img", className: "img-style", src: "", alt: "NexuraVault-logo" },
+  { tag: "img", className: "img-style", src: "imag.jpg", alt: "NexuraVault-logo" },
 ];
 
 export const sidbarlinks = [
@@ -17,7 +17,7 @@ export const routes = {
   3: "Products",
   4: "Analytics",
 };
-export const orderes = [
+export const orders = [
   { id : "ORD-001",custimer:"Mahmoud" , Products:"BMW M5", status:"Completed", total:"150,000$" },
   { id : "ORD-002",custimer:"ALi" , Products:"BMW M3", status:"Pending", total:"135,000$"},
  
@@ -34,8 +34,9 @@ export const pages = {
   ],
   orders: [
     { type: "header-row", title: "Orders", sub: "Welcome-to-NexuraVault", className: "page-header", },
-    { type: "Order-table", data:orderes},
+    { type: "Order-table", data:orders},
   ],
+
   Products: [
     { type: "header-row", title: "Products", sub: "Welcome-to-NexuraVault", className: "page-header", },
  {

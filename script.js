@@ -1,4 +1,6 @@
- import { sidbarlinks,routes,headerdata , pages, orderes} from "./data.js";
+ import { sidbarlinks,routes,headerdata , pages, orders} from "./data.js";
+ import { renderOrderTable } from "./orders.js";
+ import { rendercarcard } from "./Products.js";
 const container =
    document.createElement("div");
 const sidbar =
@@ -21,7 +23,6 @@ bodywrappr.appendChild(sidbar);
 bodywrappr.appendChild(content);
 container.appendChild(bodywrappr);
 document.body.appendChild(container);
-
 // داله الرساله
 function showtoast(message){
    const toast = creator("div" , "toast-notification");
@@ -29,18 +30,29 @@ function showtoast(message){
       document.body.appendChild(toast);
       setTimeout(() =>{
          toast.remove();
-      },2000);
+      },1000);
 }
-//الهيدر
+
+// //الهيدر
 headerdata.forEach(data => {
-   const el =
-      document.createElement(data.tag);
+   const el = document.createElement(data.tag);
    if (data.text) el.textContent = data.text;
    if (data.src) el.src = data.src;
    if (data.className) el.className = data.className;
-   if (data.alt)el.alt = data.alt;
-   header.appendChild(el);
-})
+   if (data.alt) el.alt = data.alt;
+
+   if (data.tag === "img") {
+      el.src = data.src 
+      el.onclick = () => {
+         makeImageEdit(el, (newImgSrc) => {
+            data.src = newImgSrc; 
+            showtoast("تم تحديث اللوجو بنجاح!");
+         });
+      };
+   }
+   header.appendChild(el); 
+});
+
 //اعمل لوب علي الداتا السيدبار
 sidbarlinks.forEach(data => {
    const btn =
@@ -67,11 +79,10 @@ function creator(tag, className, text, img , alttext = "Nexuravalut") {
       el.src = img;
       el.alt = alttext;
    }
-
    return el;
 }
 //وظيفتها انها تلف ع العناصر وتشوف المتحوي اللي موجود جواهم
-function drawpage(dataArray) {
+function drawpage(dataArray , pageName) {
   content.replaceChildren();
   // اعمل wrapper للـ stats و wrapper للـ products
   const statsWrapper = creator("div", "stats-wrapper");
@@ -79,17 +90,30 @@ function drawpage(dataArray) {
   
   dataArray.forEach(item => {
     let el;
-    //
     if (item.type === "header-row") {
       el = creator("div", item.className);
       const t = creator("h1", null, item.title);
-      const d = creator("p", null, item.sub);
-      el.append(t, d);
-      content.appendChild(el); // الهيدر يتحط دايركت
+         let d;
+      if (item.title === "Products") {
+       d = creator("button", "btn-ADD", "Add New Product");
+      d.onclick = () => {
+         const newProduct = {
+            type: "car-card",
+            price: "0",
+            title: "New Product",
+            image: "",
+            className: "car-card"  
+         };
+        rendercarcard(newProduct,creator,cardsWrapper,makeImageEdit,showtoast,drawpage,dataArray,el);
+      };
+   }else {
+         d = creator("p", null, item.sub);
+      }
+      el.append(t, d );
+      content.appendChild(el); // العنوان في الأول
+    
+      
     }
-
-
-    //card التحليلات
     else if (item.type === "stat-card") {
       el = creator("div", item.className);
       const h2 = creator("h2", null, item.label);
@@ -97,80 +121,18 @@ function drawpage(dataArray) {
       el.append(h2, p);
       statsWrapper.appendChild(el); // الكروت في الـ stats
     }
-
-
-    //المنتجات 
     else if (item.type === "car-card") {
-      el = creator("div", item.className);
-      const img = creator("img", "car-card-image", null, item.image);
-      const title = creator("h3", null, item.title);
-      const price = creator("p", null, item.price);
-      const Edit = creator("button", "btn","Edit",) 
-      const Delet = creator("button", "btn","Delet",) 
-      Edit.onclick = () => {
-         const backdrop = creator("div" , "modal-backdrop");
-         const showcar = creator("div" ,"showcar-style");
-         const inputname = creator("input" , "inputname");
-         inputname.value = item.title
-         const inputvalue = creator("input" , "inputvalue");
-          inputvalue.value = item.price
-         const btnsave = creator("button" , "btnsave");
-         btnsave.innerText ="save";
-         showcar.append(inputname,inputvalue,btnsave);
-         backdrop.appendChild(showcar);
-         document.body.appendChild(backdrop)
-         backdrop.onclick = (e) => {
-          if(e.target===backdrop){
-          backdrop.remove();}
-         }
-         btnsave.onclick = () =>{
-            item.title = inputname.value;
-            item.price = inputvalue.value;
-            cardsWrapper.replaceChildren();
-            drawpage(dataArray);
-            backdrop.remove()
-
-            showtoast("تم تحديث البيانات بنجاح");
-         }
-      }
-      el.append(img, title, price,Edit,Delet);
-      cardsWrapper.appendChild(el); // العربيات في الـ cards
+      rendercarcard(item , 
+         creator,cardsWrapper,makeImageEdit,
+         showtoast,drawpage,dataArray)
     }
-
-
-
-
-
-    //Order 
-    else if (item.type === "Order-table"){
-     const table = creator("table", "order-table-class");
-     const tbody = creator("tbody"); 
-     const thead = creator("thead");
-     const headerRow  = creator("tr");
-      const keys = 
-      Object.keys(item.data[0]);
-      keys.forEach(key => {
-         const th = creator("th" , null , key.toUpperCase());
-         headerRow.appendChild(th);
-      })
-        thead.appendChild(headerRow);
-   table.appendChild(thead);
-     orderes.forEach(orderes => {
-       const tr =creator("tr");
-        Object.values(orderes).forEach(value =>{
-         const td = creator("td", "tr-style" , String(value));
-         tr.appendChild(td);
-        });
-        tbody.appendChild(tr);
-      })
-    table.appendChild(tbody);
-    content.appendChild(table);
+    else if (item.type === "Order-table") {
+      const table = renderOrderTable(item, creator);
+      content.appendChild(table);
     }
-      // حط الـ wrappers لو فيهم حاجة
-  if (statsWrapper.children.length) content.appendChild(statsWrapper);
-  if (cardsWrapper.children.length) content.appendChild(cardsWrapper);
+    if (statsWrapper.children.length) content.appendChild(statsWrapper);
+    if (cardsWrapper.children.length) content.appendChild(cardsWrapper);
   
-
 
 
 
@@ -197,9 +159,11 @@ function drawpage(dataArray) {
                    } 
                    });//new chart
                    }
-});
 
+  
+   });
 }
+
 function render(pageName) {
    //تغير URL
    window.history.pushState({},
@@ -211,7 +175,9 @@ render(routes[1]);
 
 
 
-//
+
+
+//  upgrade 
 const h1 = document.createElement("h1");
 h1.textContent= "🔐";
 h1.className = "hook";
@@ -226,44 +192,34 @@ h1.className = "hook";
 
 
 
-function makeImageEdittable(imgElement,onSaveCallback){
+
+
+// رفع الصور
+function makeImageEdit(imgElement, onSaveCallback){
     imgElement.style.cursor = "pointer";
-    imgElement.onclick = () =>{
-     const hiddeninput= creator("input");
-     hiddeninput.type ="File";
-     hiddeninput.accept = "image/ *";
-     hiddeninput.style.display = "none";
-     document.body.appendChild(hiddeninput);
-     hiddeninput.onclick();
-     hiddeninput.onchange = 
-     function(){
-     if (this.files &&this.files[0]){
-      const reader = new FileReader();
-      reader.onload=function(e){
-        imgElement.src = 
-        e.target.result;
-        onSaveCallback(e.target.result);
-        hiddeninput.remove();
+    imgElement.onclick = () => {
+      const hiddeninput = creator("input");
+      hiddeninput.type = "file";
+      hiddeninput.accept = "image/*"; // شيلنا المسافة هنا
+      hiddeninput.style.display = "none";
+      hiddeninput.style.width = 200;
+      document.body.appendChild(hiddeninput);
+      hiddeninput.click(); 
+      hiddeninput.onchange = () => {
+         if (hiddeninput.files && hiddeninput.files[0]){
+            const reader = new FileReader();
+            reader.onload = (e) =>{
+               const base64Url = e.target.result;
+               imgElement.src = base64Url;
+               onSaveCallback(base64Url);
+               hiddeninput.remove();
+            };
+            reader.readAsDataURL(hiddeninput.files[0]);
+
+         } else {
+            hiddeninput.remove();
+         }
       };
-      reader.readAsDataURL(this.files[0]);
-     }else{
-      hiddeninput.remove();
-     }
-     }
-
-    } 
-
-
-
+    };
 }
-
-
-
-
-
-
-
-
-
-
 
