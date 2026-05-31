@@ -18,8 +18,7 @@ export const routes = {
   4: "Analytics",
 };
 export const orders = [
-  { id : "ORD-001",custimer:"Mahmoud" , Products:"BMW M5", status:"Completed", total:"150,000$" },
-  { id : "ORD-002",custimer:"ALi" , Products:"BMW M3", status:"Pending", total:"135,000$"},
+  
  
 ];
 

@@ -1,5 +1,5 @@
 export function renderOrderTable(item, creator) {
-    const orders = item.data || [];
+    const orders = item.data; 
     if (!orders.length) {
         return creator("p", "empty-message", "لا توجد طلبات للعرض");
     }

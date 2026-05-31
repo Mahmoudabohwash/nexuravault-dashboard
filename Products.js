@@ -1,7 +1,7 @@
  export function rendercarcard(item , creator,cardsWrapper,
-    makeImageEdit,showtoast,drawpage,dataArray,el){
+    makeImageEdit,showtoast,drawpage,dataArray){
         
-   el = creator("div", item.className);
+   const el = creator("div", item.className);
       const img = creator("img", "car-card-image", null, item.image);
       const title = creator("h3", null, item.title);
       const price = creator("p", null, item.price);
@@ -25,12 +25,11 @@
          backdrop.appendChild(showcar);
          document.body.appendChild(backdrop)
          backdrop.onclick = (e) => {
-          if(e.target===backdrop){
+          if(e.target === backdrop){
           backdrop.remove();}
          }
          btnsave.onclick = () =>{
-            item.title = inputname.value;
-            item.price = inputvalue.value;
+            item.title = inputname.value;                                         
             cardsWrapper.replaceChildren();
             drawpage(dataArray);
             backdrop.remove()
@@ -44,3 +43,7 @@
       el.append(img, title, price,Edit,Delet);
       cardsWrapper.appendChild(el); //
  }
+
+
+
+ 
